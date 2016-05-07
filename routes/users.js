@@ -1,9 +1,15 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
+var models = require('../sequelize/models/index');
+
+
+router.post('/', function(req, res, next) {
+  models.User.create({
+    Email: req.body.Email
+  }).then(function(user) {
+    res.json(user);
+  });
 });
 
 module.exports = router;
